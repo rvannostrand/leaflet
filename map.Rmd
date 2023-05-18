@@ -1,7 +1,7 @@
 ---
-title: "map"
+title: "CCamps - Concentration Camp System Locations"
 author: "Rachel Van Nostrand"
-date: "2023-05-17"
+date: "Updated May 2023"
 output: html_document
 ---
 
@@ -24,9 +24,6 @@ library(mapview)
 library(sfheaders)
 
 states45 <- st_read("/Users/rachelvannostrand/Documents/NSF/Maps/mappy2.shp")
-```
-
-```{r Zooming in}
 
 
 state_popup_2 <- ifelse(states45$CAMPS >= 1, 
@@ -39,14 +36,18 @@ state_popup_2 <- ifelse(states45$CAMPS >= 1,
                          paste0( "<br><strong> Country: </strong>", 
                       states45$NAME))
 
-m <- leaflet(states45) %>%
+Concentration_Camp_Systems <- leaflet(states45) %>%
   addTiles() %>% 
   addPolygons(color = "#444444", weight = 1, popup = state_popup_2, smoothFactor = 0.5,
               opacity = 1.0, fillOpacity = 0.5,
               fillColor = ~colorBin("YlOrRd", CAMPS)(CAMPS),
               highlightOptions = highlightOptions(color = "white", weight = 2,
                                                   bringToFront = TRUE))
-m
+```
+
+```{r}
+
+Concentration_Camp_Systems
 
 
 ```
